@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 export default function ProfileScreen({route, navigation}) {
   const currentUser = route.params.currentUser;
+  const [avatar, setAvatar ]= useState(currentUser.avatar);
   const navigateToEditProfile = () => {
     navigation.navigate('EditProfile', {currentUser: currentUser});
   };
   const navigateDetailRating = () => {
     navigation.navigate('DetailRating', {currentUser: currentUser});
   };
-  const navigateToDetailRatingYs= () => {
+  const navigateToDetailRatingYs = () => {
     navigation.navigate('DetailRatingYs', {currentUser: currentUser});
   };
   const navigateToRatingYourSelf = () => {
@@ -21,8 +22,8 @@ export default function ProfileScreen({route, navigation}) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}></View>
-      <Image source={{uri: currentUser.avatar}} style={styles.avatar} />
+      <View style={styles.header} />
+      <Image source={{uri: avatar}} style={styles.avatar} />
       <View style={styles.content}>
         <TouchableOpacity
           style={styles.itemContainer}
@@ -45,7 +46,9 @@ export default function ProfileScreen({route, navigation}) {
           <Text style={{fontSize: 18, marginLeft: 10}}>Tự đánh giá</Text>
         </TouchableOpacity>
         <View style={styles.spacer} />
-        <TouchableOpacity style={styles.itemContainer} onPress={navigateToDetailRatingYs}>
+        <TouchableOpacity
+          style={styles.itemContainer}
+          onPress={navigateToDetailRatingYs}>
           <Icon name="staro" size={20} />
           <Text style={{fontSize: 18, marginLeft: 10}}>Các kì đánh giá</Text>
         </TouchableOpacity>
@@ -100,7 +103,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
-
   },
   content: {
     backgroundColor: 'white',
@@ -121,7 +123,6 @@ const styles = StyleSheet.create({
     height: 60,
     alignItems: 'center',
     paddingHorizontal: 20,
-   
   },
   spacer: {
     height: 1,

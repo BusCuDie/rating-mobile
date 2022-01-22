@@ -80,7 +80,9 @@ const Item = ({item}) => {
               bottom: 5,
               right: 5,
             }}>
-            <Text style={{color: colors.ROSE,fontWeight:'bold'}}>{'<<<'} Thu gọn</Text>
+            <Text style={{color: colors.ROSE, fontWeight: 'bold'}}>
+              {'<<<'} Thu gọn
+            </Text>
           </TouchableOpacity>
         </View>
       )}
@@ -99,7 +101,7 @@ export default function DetailRatingScreen({route, navigation}) {
         console.log(typeof data[0].createTime);
       })
       .catch(err => console.log(err));
-  }, []);
+  }, [currentUser._id, data]);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <View

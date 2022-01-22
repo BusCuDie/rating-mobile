@@ -19,7 +19,7 @@ export default function RatingYourSeftScreen({route, navigation}) {
   const [data, setData] = React.useState([]);
   React.useEffect(() => {
     axios
-      .get(`http://10.0.2.2:5000/api/users/`)
+      .get('http://10.0.2.2:5000/api/users/')
       .then(res => {
         res.data.sort((a, b) => Number(b.ratepoint) - Number(a.ratepoint));
         setData(res.data);
@@ -37,46 +37,45 @@ export default function RatingYourSeftScreen({route, navigation}) {
       <View style={styles.contentContainer}>
         <ScrollView style={styles.listContainer}>
           {data.map((item, index) => {
-
             return (
-              <React.Fragment key={index} >
-              <View
-                style={[styles.itemContainer]}
-                >
-                <Image
-                  source={{uri: item.avatar}}
-                  style={styles.itemImg}
-                  resizeMode="contain"
+              <React.Fragment key={index}>
+                <View style={[styles.itemContainer]}>
+                  <Image
+                    source={{uri: item.avatar}}
+                    style={styles.itemImg}
+                    resizeMode="contain"
+                  />
+                  <View style={styles.itemLeftContainer}>
+                    <Text
+                      style={{
+                        fontSize: 18,
+                        fontWeight: '700',
+                        color: item._id == currentUser._id ? 'green' : 'black',
+                      }}>
+                      {item._id == currentUser._id ? 'Bạn' : item.name}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: 14,
+                        fontWeight: '700',
+                        color: item._id == currentUser._id ? 'green' : 'black',
+                      }}>
+                      Điểm: {item.ratepoint}
+                    </Text>
+                  </View>
+                  <View style={styles.rankContainer}>
+                    <Text style={styles.rankText}>{index + 1}</Text>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    height: 1,
+                    width: '90%',
+                    alignSelf: 'center',
+                    backgroundColor: colors.BLACK,
+                  }}
                 />
-                <View style={styles.itemLeftContainer}>
-                  <Text
-                    style={{
-                      fontSize: 18,
-                      fontWeight: '700',
-                      color: item._id == currentUser._id ?"green" :"black"
-                    }}>
-                    {item._id == currentUser._id ?"Bạn" :item.name}
-                  </Text>
-                  <Text
-                    style={{
-                      fontSize: 14,
-                      fontWeight: '700',
-                      color:  item._id == currentUser._id ?"green" :"black"
-                    }}>
-                    Điểm: {item.ratepoint}
-                  </Text>
-                </View>
-                <View style={styles.rankContainer}>
-                  <Text style={styles.rankText}>{index + 1}</Text>
-                </View>
-              </View>
-              <View style={{
-                  height: 1,
-                  width: '90%',
-                  alignSelf:'center',
-                  backgroundColor:colors.BLACK
-                }}/>
-           </React.Fragment>
+              </React.Fragment>
             );
           })}
         </ScrollView>
@@ -137,13 +136,12 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   listContainer: {
-  backgroundColor:'white',
+    backgroundColor: 'white',
     //  marginHorizontal: 8,
     borderTopRightRadius: 40,
     borderTopLeftRadius: 40,
     flex: 1,
     paddingTop: 20,
-
   },
   itemImg: {
     height: 60,
@@ -162,8 +160,8 @@ const styles = StyleSheet.create({
     width: 40,
     backgroundColor: colors.BRIGHT_SUN,
     borderRadius: 20,
-    justifyContent:'center',
-    alignItems:'center'
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   rankText: {
     fontSize: 18,

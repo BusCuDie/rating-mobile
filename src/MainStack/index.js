@@ -9,10 +9,12 @@ import EditProfile from './EditProfile';
 import RatingScreen from './RatingScreen';
 import DetailRatingYsScreen from './DetailRatingYsScreen';
 import FAQScreen from './FAQScreen';
+import ConservationScreen from './ConservationScreen';
+import DetailConservationScreen from './DetailConservationScreen';
 const Stack = createStackNavigator();
 export default function MainStack() {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}} >
+    <Stack.Navigator screenOptions={{headerShown: false}}>
       <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen name="DetailRating" component={DetailRatingScreen} />
@@ -22,6 +24,8 @@ export default function MainStack() {
       <Stack.Screen name="Rating" component={RatingScreen} />
       <Stack.Screen name="DetailRatingYs" component={DetailRatingYsScreen} />
       <Stack.Screen name="FAQCAD" component={FAQScreen} />
+      <Stack.Screen name="ConservationScreen" component={ConservationScreen} />
+      <Stack.Screen name="DetailConservationScreen" component={DetailConservationScreen}/>
     </Stack.Navigator>
   );
 }

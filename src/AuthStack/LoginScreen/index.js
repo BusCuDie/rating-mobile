@@ -20,24 +20,26 @@ export default function LoginScreen({navigation}) {
       Alert.alert('Cảnh báo', 'Thông tin không được để trống');
     } else {
       axios
-        .post(`http://10.0.2.2:5000/api/users/login`, {
+        .post('http://10.0.2.2:5000/api/users/login', {
           username: username,
           password: password,
         })
         .then(res => {
           if (!res.data) {
-            Alert.alert('Cảnh báo', 'Tên đăng nhập hoặc mật khẩu không chính xác');
+            Alert.alert(
+              'Cảnh báo',
+              'Tên đăng nhập hoặc mật khẩu không chính xác',
+            );
           } else {
-           res.data.role=='CIV'?
-           navigation.navigate('CIVStack',{
-            screen: 'CIVMain',
-            params: {currentUser: res.data},
-          })
-           :
-            navigation.navigate('MainStack', {
-              screen: 'Home',
-              params: {currentUser: res.data},
-            });
+            res.data.role == 'CIV'
+              ? navigation.navigate('CIVStack', {
+                  screen: 'CIVMain',
+                  params: {currentUser: res.data},
+                })
+              : navigation.navigate('MainStack', {
+                  screen: 'Home',
+                  params: {currentUser: res.data},
+                });
           }
         })
         .catch(err => console.log(err));
@@ -45,8 +47,9 @@ export default function LoginScreen({navigation}) {
   };
   return (
     <View style={styles.container}>
-      <View style={styles.topContainer}><Text style={styles.topHeaderText}>
-          Đăng nhập</Text></View>
+      <View style={styles.topContainer}>
+        <Text style={styles.topHeaderText}>Đăng nhập</Text>
+      </View>
       <View style={styles.bottomContainer}>
         <View style={styles.inputContainer}>
           <Text style={styles.inputLabel}>Tên đăng nhập</Text>
@@ -57,11 +60,12 @@ export default function LoginScreen({navigation}) {
               color={colors.TORY_BLUE}
               style={styles.icon}
             />
-            <TextInput placeholder="Tên đăng nhập" 
-            style={styles.input}
-             onChangeText={text=>setUsername(text)}
-             maxLength={12}
-             />
+            <TextInput
+              placeholder="Tên đăng nhập"
+              style={styles.input}
+              onChangeText={text => setUsername(text)}
+              maxLength={12}
+            />
           </View>
         </View>
         <View style={styles.inputContainer}>
@@ -73,20 +77,21 @@ export default function LoginScreen({navigation}) {
               color={colors.TORY_BLUE}
               style={styles.icon}
             />
-            <TextInput placeholder="Mật khẩu" 
-            style={styles.input} 
-            onChangeText={text=>setPassword(text)} 
-            secureTextEntry
-            maxLength={20}
+            <TextInput
+              placeholder="Mật khẩu"
+              style={styles.input}
+              onChangeText={text => setPassword(text)}
+              secureTextEntry
+              maxLength={20}
             />
           </View>
         </View>
         <TouchableOpacity style={styles.button} onPress={login}>
           <Text style={styles.buttonText}>Đăng nhập</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.forgotPasswordContainer} 
-        onPress={()=>navigation.navigate('SignUp')}
-        >
+        <TouchableOpacity
+          style={styles.forgotPasswordContainer}
+          onPress={() => navigation.navigate('SignUp')}>
           <Text style={styles.forgotPasswordText}>
             Bạn chưa có tài khoản? Đăng kí ngay
           </Text>
@@ -107,8 +112,8 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 40,
     borderBottomRightRadius: 40,
     marginBottom: 30,
-    justifyContent:'center',
-    alignItems:"center"
+    justifyContent: 'center',
+    alignItems:'center',
   },
   bottomContainer: {
     backgroundColor: 'white',
@@ -128,7 +133,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor:colors.TORY_BLUE,
+    borderColor: colors.TORY_BLUE,
     borderRadius: 15,
   },
   input: {
@@ -138,31 +143,31 @@ const styles = StyleSheet.create({
   icon: {
     marginHorizontal: 10,
   },
-  button:{
-    marginHorizontal:30,
-    backgroundColor:colors.TORY_BLUE,
+  button: {
+    marginHorizontal: 30,
+    backgroundColor: colors.TORY_BLUE,
     height: 50,
-    justifyContent:'center',
-    alignItems:'center',
-    borderRadius:50,
-    marginTop:20,
-    marginBottom:15
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+    marginTop: 20,
+    marginBottom: 15,
   },
-  buttonText:{
-    fontSize:20,
+  buttonText: {
+    fontSize: 20,
     color: colors.WHITE,
-    fontWeight:'bold'
+    fontWeight: 'bold',
   },
-  forgotPasswordContainer:{
-    alignSelf:'center'
+  forgotPasswordContainer: {
+    alignSelf: 'center',
   },
-  forgotPasswordText:{
+  forgotPasswordText: {
     color: 'blue',
-    fontSize:14
+    fontSize: 14,
   },
-  topHeaderText:{
-    fontSize:30,
-    fontWeight:'bold',
-    color: colors.WHITE
-}
+  topHeaderText: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: colors.WHITE,
+  },
 });

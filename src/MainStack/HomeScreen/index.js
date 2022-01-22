@@ -114,7 +114,7 @@ export default function HomeScreen({route, navigation}) {
                 currentUser: currentUser,
               })
             }
-            title="Tự chấm"
+            title="Tự xét"
           />
         </View>
         <View style={styles.centalContainer}>
@@ -127,7 +127,13 @@ export default function HomeScreen({route, navigation}) {
             }>
             <Text style={styles.centalText}>Hỏi đáp</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.chatContainer}>
+          <TouchableOpacity
+            style={styles.chatContainer}
+            onPress={() =>
+              navigation.navigate('ConservationScreen', {
+                currentUser: currentUser,
+              })
+            }>
             <Text style={styles.chatText}>Trò chuyện</Text>
           </TouchableOpacity>
         </View>

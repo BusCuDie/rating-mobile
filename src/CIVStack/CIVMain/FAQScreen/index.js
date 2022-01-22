@@ -31,7 +31,7 @@ const Item = ({item}) => {
     <View style={styles.itemContainer}>
       <Text>{item.asker}</Text>
       <Text style={styles.titleText}>{item.title}</Text>
-      
+
       {item.answer.map((itemsub, indexsub) => (
         <SubItem item={itemsub} key={indexsub} />
       ))}
@@ -44,7 +44,7 @@ export default function FAQScreen({route}) {
   const currentUser = route.params.currentUser;
   React.useEffect(() => {
     axios
-      .get(`http://10.0.2.2:5000/api/faqs/`)
+      .get('http://10.0.2.2:5000/api/faqs/')
       .then(res => {
         setData(res.data);
       })
@@ -53,11 +53,11 @@ export default function FAQScreen({route}) {
 
   const onSend = () => {
     axios
-      .post(`http://10.0.2.2:5000/api/faqs/create`, {
+      .post('http://10.0.2.2:5000/api/faqs/create', {
         title: question,
         asker: currentUser.name,
       })
-      .then(() =>{
+      .then(() => {
         Alert.alert('Thành công', 'Đã đặt câu hỏi thành công');
         setQuestion('');
       })
@@ -65,13 +65,13 @@ export default function FAQScreen({route}) {
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.topContainer}>
         <Text style={styles.topText}>Hỏi đáp</Text>
       </View>
       <View style={styles.headerContainer}>
         <TextInput
-        value={question}
+          value={question}
           multiline
           style={styles.headerInput}
           placeholder="Đặt câu hỏi"
@@ -91,12 +91,12 @@ export default function FAQScreen({route}) {
           }}
         />
       </View>
-      <View>
+      <ScrollView>
         {data.map((item, index) => {
           return <Item item={item} key={index} />;
         })}
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     paddingVertical: 8,
     paddingHorizontal: 15,
-    marginBottom:20
+    marginBottom: 20,
   },
   titleText: {
     fontSize: 23,

@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import colors from '../../../colors';
-export default function DetailNew({route}) {
+import Icon from 'react-native-vector-icons/FontAwesome';
+export default function DetailNew({route, navigation}) {
   const item = route.params.item;
   return (
     <View>
@@ -20,24 +21,29 @@ export default function DetailNew({route}) {
         Số ngày sử dụng điện dài hơn, lượng điện tiêu thụ tăng theo quy luật
         hằng năm vào những tháng hè, cộng với việc giá bán điện điều chỉnh làm
         tổng số tiền điện tháng 4/2019 các hộ dân phải trả tăng hơn so với tháng
-        trước. {'\n'}Việc tăng giá bán lẻ điện bình quân thêm 8,36% từ 20/3 cũng là
-        nguyên nhân khiến tiền điện của các hộ gia đình tăng theo. Cùng đó, biểu
-        tính giá điện lũy tiến theo 6 bậc thang nên khi khách hàng dùng điện
-        càng nhiều, tiền điện phải trả càng cao. Cụ thể, giá bán lẻ điện sinh
-        hoạt chia theo 6 bậc thang, thấp nhất 1.678 đồng một kWh và cao nhất
-        2.927 đồng một kWh. Đối với việc tính giá điện các phòng trọ, thời gian
-        qua ngành điện đã phối hợp với chính quyền các địa phương rà soát 13.543
-        khách hàng có nhà cho thuê để ở với tổng số 94.023 phòng trọ. Theo đó,
-        EVN Hà Nội đã yêu cầu được 13.484/13.543 khách hàng có nhà cho thuê ký
-        cam kết thu tiền điện của người thuê nhà đúng giá quy định. Tuy nhiên,
-        với chức năng của mình, EVN HANOI không đủ thẩm quyền để xử phạt đối với
-        chủ nhà trọ, trừ trường hợp phối hợp với chính quyền sở tại. Song trên
-        thực tế, có quá ít số chủ nhà trọ trên địa bàn thành phố bị xử phạt về
-        hành vi vi phạm khi thu tiền điện với giá cao. “Trong trường hợp người
-        thuê nhà bị thu tiền điện giá cao hơn so với quy định, có thể gọi đến số
-        điện thoại 19001288 (phục vụ 24/7) để được giải quyết theo đúng các quy
-        định của Nhà nước”, EVN Hà Nội khuyến cáo.
+        trước. {'\n'}Việc tăng giá bán lẻ điện bình quân thêm 8,36% từ 20/3 cũng
+        là nguyên nhân khiến tiền điện của các hộ gia đình tăng theo. Cùng đó,
+        biểu tính giá điện lũy tiến theo 6 bậc thang nên khi khách hàng dùng
+        điện càng nhiều, tiền điện phải trả càng cao. Cụ thể, giá bán lẻ điện
+        sinh hoạt chia theo 6 bậc thang, thấp nhất 1.678 đồng một kWh và cao
+        nhất 2.927 đồng một kWh. Đối với việc tính giá điện các phòng trọ, thời
+        gian qua ngành điện đã phối hợp với chính quyền các địa phương rà soát
+        13.543 khách hàng có nhà cho thuê để ở với tổng số 94.023 phòng trọ.
+        Theo đó, EVN Hà Nội đã yêu cầu được 13.484/13.543 khách hàng có nhà cho
+        thuê ký cam kết thu tiền điện của người thuê nhà đúng giá quy định. Tuy
+        nhiên, với chức năng của mình, EVN HANOI không đủ thẩm quyền để xử phạt
+        đối với chủ nhà trọ, trừ trường hợp phối hợp với chính quyền sở tại.
+        Song trên thực tế, có quá ít số chủ nhà trọ trên địa bàn thành phố bị xử
+        phạt về hành vi vi phạm khi thu tiền điện với giá cao. “Trong trường hợp
+        người thuê nhà bị thu tiền điện giá cao hơn so với quy định, có thể gọi
+        đến số điện thoại 19001288 (phục vụ 24/7) để được giải quyết theo đúng
+        các quy định của Nhà nước”, EVN Hà Nội khuyến cáo.
       </Text>
+      <TouchableOpacity
+        style={styles.goBackContainer}
+        onPress={() => navigation.goBack()}>
+        <Icon name="arrow-left" size={20} color="white" />
+      </TouchableOpacity>
     </View>
   );
 }
@@ -67,5 +73,10 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginHorizontal: 20,
     fontSize: 16,
+  },
+  goBackContainer: {
+    position: 'absolute',
+    top: 25,
+    left: 30,
   },
 });
