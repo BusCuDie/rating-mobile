@@ -123,7 +123,7 @@ export default function DetailRatingScreen({route, navigation}) {
         </Text>
       </View>
       <ScrollView style={styles.container}>
-        {data.map((item, index) => (
+        {data.reverse().map((item, index) => (
           <Item item={item} key={index} />
         ))}
       </ScrollView>

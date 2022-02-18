@@ -25,7 +25,7 @@ export default function EditProfile({route, navigation}) {
       </View>
       <View style={styles.boxItemContainer}>
         <Text style={{color: 'black', fontWeight: '400', fontSize: 18}}>
-         Họ và tên
+          Họ và tên
         </Text>
         <View style={styles.noedittable}>
           <Text style={{color: 'black', fontWeight: '500', fontSize: 16}}>
@@ -69,7 +69,7 @@ export default function EditProfile({route, navigation}) {
         </Text>
         <View style={styles.noedittable}>
           <Text style={{color: 'black', fontWeight: '500', fontSize: 16}}>
-            {currentUser.role}
+            {currentUser.position}
           </Text>
         </View>
       </View>

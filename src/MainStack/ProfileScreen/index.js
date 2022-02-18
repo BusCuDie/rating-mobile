@@ -16,6 +16,9 @@ export default function ProfileScreen({route, navigation}) {
   const navigateToRatingYourSelf = () => {
     navigation.navigate('RatingYourSeft', {currentUser: currentUser});
   };
+  const navigateToContactUs = () => {
+    navigation.navigate('ContactUsScreen', {currentUser: currentUser});
+  };
   const logout = () => {
     navigation.navigate('Login');
   };
@@ -51,6 +54,13 @@ export default function ProfileScreen({route, navigation}) {
           onPress={navigateToDetailRatingYs}>
           <Icon name="staro" size={20} />
           <Text style={{fontSize: 18, marginLeft: 10}}>Các kì đánh giá</Text>
+        </TouchableOpacity>
+        <View style={styles.spacer} />
+        <TouchableOpacity
+          style={styles.itemContainer}
+          onPress={navigateToContactUs}>
+          <Icon name="idcard" size={20} />
+          <Text style={{fontSize: 18, marginLeft: 10}}>Tiếp nhận phản ánh</Text>
         </TouchableOpacity>
         <View style={styles.spacer} />
         <TouchableOpacity style={styles.itemContainer} onPress={logout}>

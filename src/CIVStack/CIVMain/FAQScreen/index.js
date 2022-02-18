@@ -13,15 +13,17 @@ import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
 const SubItem = ({item}) => {
   return (
-    <View style={styles.subItemContainer}>
-      <Text
-        style={{
-          fontSize: 16,
-          fontWeight: 'bold',
-        }}>
-        {item.from}
-      </Text>
-      <Text>{item.content}</Text>
+    <View style={{alignItems: 'flex-start'}}>
+      <View style={styles.subItemContainer}>
+        <Text
+          style={{
+            fontSize: 16,
+            fontWeight: 'bold',
+          }}>
+          {item.from}
+        </Text>
+        <Text>{item.content}</Text>
+      </View>
     </View>
   );
 };
@@ -29,7 +31,13 @@ const SubItem = ({item}) => {
 const Item = ({item}) => {
   return (
     <View style={styles.itemContainer}>
-      <Text>{item.asker}</Text>
+      <Text
+        style={{
+          fontSize: 20,
+          fontWeight: 'bold',
+        }}>
+        {item.asker}
+      </Text>
       <Text style={styles.titleText}>{item.title}</Text>
 
       {item.answer.map((itemsub, indexsub) => (
@@ -92,7 +100,7 @@ export default function FAQScreen({route}) {
         />
       </View>
       <ScrollView>
-        {data.map((item, index) => {
+        {data.reverse().map((item, index) => {
           return <Item item={item} key={index} />;
         })}
       </ScrollView>
@@ -150,8 +158,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   titleText: {
-    fontSize: 23,
-    fontWeight: 'bold',
+    fontSize: 17,
+    fontWeight: '400',
     color: 'red',
     marginBottom: 15,
   },

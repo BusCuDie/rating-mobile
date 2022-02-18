@@ -13,15 +13,20 @@ import axios from 'axios';
 import Icon from 'react-native-vector-icons/FontAwesome';
 const SubItem = ({item}) => {
   return (
-    <View style={styles.subItemContainer}>
-      <Text
-        style={{
-          fontSize: 16,
-          fontWeight: 'bold',
-        }}>
-        {item.from}
-      </Text>
-      <Text>{item.content}</Text>
+    <View
+      style={{
+        alignItems: 'flex-start',
+      }}>
+      <View style={styles.subItemContainer}>
+        <Text
+          style={{
+            fontSize: 16,
+            fontWeight: 'bold',
+          }}>
+          {item.from}
+        </Text>
+        <Text>{item.content}</Text>
+      </View>
     </View>
   );
 };
@@ -36,12 +41,22 @@ const Item = ({item, name}) => {
         from: name,
         content: reply,
       });
+      setReply('');
     }
   };
   return (
     <View style={styles.itemContainer}>
-      <Text>{item.asker}</Text>
+      <Text
+        style={{
+          fontSize: 20,
+          fontWeight: 'bold',
+        }}>
+        {item.asker}
+      </Text>
       <Text style={styles.titleText}>{item.title}</Text>
+      {item.answer.reverse().map((itemsub, indexsub) => (
+        <SubItem item={itemsub} key={indexsub} />
+      ))}
       <View style={styles.replyContainer}>
         <TextInput
           style={styles.replyInput}
@@ -53,19 +68,16 @@ const Item = ({item, name}) => {
           <Text style={styles.replyButtonText}>Trả lời</Text>
         </TouchableOpacity>
       </View>
-      {item.answer.map((itemsub, indexsub) => (
-        <SubItem item={itemsub} key={indexsub} />
-      ))}
     </View>
   );
 };
-export default function FAQScreen({route,navigation}) {
+export default function FAQScreen({route, navigation}) {
   const [question, setQuestion] = React.useState('');
   const [data, setData] = React.useState([]);
   const currentUser = route.params.currentUser;
   React.useEffect(() => {
     axios
-      .get(`http://10.0.2.2:5000/api/faqs/`)
+      .get('http://10.0.2.2:5000/api/faqs/')
       .then(res => {
         setData(res.data);
       })
@@ -74,16 +86,16 @@ export default function FAQScreen({route,navigation}) {
 
   return (
     <View style={{flex: 1}}>
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <View style={styles.topContainer}>
           <Text style={styles.topText}>Hỏi đáp</Text>
         </View>
-        <View>
-          {data.map((item, index) => {
+        <ScrollView>
+          {data.reverse().map((item, index) => {
             return <Item item={item} key={index} name={currentUser.name} />;
           })}
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </View>
       <TouchableOpacity
         style={styles.arrowBack}
         onPress={() => navigation.goBack()}>
@@ -140,27 +152,26 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   titleText: {
-    fontSize: 23,
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontWeight: '400',
     color: 'red',
     marginBottom: 15,
   },
   subItemContainer: {
     backgroundColor: colors.WHISKERS,
-    padding: 10,
     marginBottom: 10,
+    padding: 10,
     borderRadius: 20,
   },
   replyContainer: {
     flexDirection: 'row',
-
-    marginBottom: 30,
+    marginBottom: 10,
   },
   replyInput: {
     width: '70%',
     paddingHorizontal: 10,
     textAlignVertical: 'top',
-    height: 100,
+    height: 60,
     borderBottomLeftRadius: 10,
     borderTopLeftRadius: 10,
     borderWidth: 1,
@@ -170,8 +181,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: colors.TORY_BLUE,
-    justifyContent: 'center',
-    alignItems: 'center',
     borderBottomRightRadius: 10,
     borderTopRightRadius: 10,
   },

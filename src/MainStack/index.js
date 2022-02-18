@@ -11,6 +11,7 @@ import DetailRatingYsScreen from './DetailRatingYsScreen';
 import FAQScreen from './FAQScreen';
 import ConservationScreen from './ConservationScreen';
 import DetailConservationScreen from './DetailConservationScreen';
+import ContactUsScreen from './ContactUsScreen';
 const Stack = createStackNavigator();
 export default function MainStack() {
   return (
@@ -26,6 +27,7 @@ export default function MainStack() {
       <Stack.Screen name="FAQCAD" component={FAQScreen} />
       <Stack.Screen name="ConservationScreen" component={ConservationScreen} />
       <Stack.Screen name="DetailConservationScreen" component={DetailConservationScreen}/>
+      <Stack.Screen name="ContactUsScreen" component={ContactUsScreen}/>
     </Stack.Navigator>
   );
 }

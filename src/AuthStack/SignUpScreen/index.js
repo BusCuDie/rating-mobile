@@ -23,10 +23,14 @@ export default function SignUpScreen({navigation}) {
   const [password, setPassword] = React.useState(null);
   const [retypePass, setRetypePass] = React.useState(null);
   const signup = () => {
+    const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/g;
     if (!name || !username || !password || !retypePass) {
       Alert.alert('Cảnh báo', 'Vui lòng nhập đầy đủ thông tin');
-    } else if (password.length < 5) {
-      Alert.alert('Cảnh báo', 'Mật khẩu phải bao gồm 6 chữ số');
+    } else if (!regex.exec(password)) {
+      Alert.alert(
+        'Cảnh báo',
+        'Mật khẩu phải bao ít nhất 6 kí tự, gồm số và chữ cái',
+      );
     } else if (password != retypePass) {
       Alert.alert('Cảnh báo', 'Mật khẩu xác nhận không khớp');
     } else {

@@ -24,9 +24,16 @@ export default function DetailConservationScreen({route, navigation}) {
         `http://10.0.2.2:5000/api/conservation/getAllMessage/${currentUser._id}/${otherUser._id}`,
       )
       .then(res => {
-        setMessage(res.data.message.reverse());
+        if (res.data) {
+          setMessage(res.data.message.reverse());
+        } else {
+          setMessage([]);
+        }
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+        setMessage([]);
+      });
   }, [currentUser._id, message, otherUser._id]);
 
   const _onPress = () => {
@@ -39,10 +46,9 @@ export default function DetailConservationScreen({route, navigation}) {
           content: textMess,
         })
         .then(() => {
-            setTextMess('');
+          setTextMess('');
         })
         .catch(err => console.log(err));
-        
     } else {
       Alert.alert('Cảnh báo', 'Vui lòng nhập tin nhắn');
     }
